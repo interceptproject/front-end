@@ -19,6 +19,7 @@ import { SearchResultsComponent } from './common/search-results/search-results.c
 import { OrganizationProfileComponent } from './organization-profile/organization-profile.component';
 import { NavService } from './services/nav.service';
 import { AjaxService } from './services/ajax.service';
+import { RelevantOrgsService } from './relevant-orgs.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { AjaxService } from './services/ajax.service';
   entryComponents: [
     AlertComponent
   ],
-  providers: [NavService, AjaxService],
+  providers: [NavService, AjaxService, RelevantOrgsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

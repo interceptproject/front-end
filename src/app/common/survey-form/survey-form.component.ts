@@ -12,6 +12,7 @@ export class SurveyFormComponent implements OnInit {
   isSubmitReady: boolean = false;
   isEmergency: boolean = false;
   questions = [];
+  rev_orgs = [];
 
   question;
   answer;
@@ -114,14 +115,21 @@ export class SurveyFormComponent implements OnInit {
   submit() {
     let survey = {
       location: this.address.street + "," + this.address.city + "," + this.address.state + "," + this.address.zipcode,
-      services: this.tags
+      services: this.tags,
+      populations: this.tags
     };
     console.log(survey);
-    // this.ajxSvc.submitSurvey(survey).subscribe(
-    //   (data) => console.log(data),
-    //   (err) => console.log(err)
-    // );
-
+    this.ajxSvc.surveyData = survey;
+//     this.ajxSvc.submitSurvey(survey).subscribe(
+//       (data) => { 
+//           this.ajxSvc.rev_orgs = data;
+//           console.log(this.ajxSvc.rev_orgs);
+//           console.log(data);
+//                 },
+//       (err) => console.log("Wir haben error"),
+//         () => console.log("things have run")
+//     );
+//    this.ajxSvc.submitSurvey(survey);
   }
 
 }

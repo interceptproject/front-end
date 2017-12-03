@@ -14,8 +14,8 @@
           <a (click)="next()">Next</a>
         </div>
         <div class="form-btn" *ngIf="isSubmitReady">
-          <!-- <a (click)="submit()">Submit</a> -->
-          <a [routerLink]="'/search-results'">Submit</a>
+<!--           <a (click)="submit()">Submit</a> -->
+          <a (click)="submit()" [routerLink]="['/search-results']">Submit</a>
         </div>
       </form>
     </div>

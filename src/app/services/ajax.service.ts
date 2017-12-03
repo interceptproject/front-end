@@ -9,7 +9,10 @@ export class AjaxService {
   apiKey ="dNt29mbxqxK905XC1ZK1mcH60XkjR5gh";
   apiKeyString = "?apiKey=" + this.apiKey;
 
-  interceptUrl = "interceptproject.org"
+  interceptUrl = "http://www.interceptproject.org"
+//  rev_orgs:Observable<any>;
+    rev_orgs = [];
+    surveyData;
 
   private getMLabUrl(collection) {
     console.log(this.mLabUrl + collection + this.apiKeyString);
@@ -21,17 +24,28 @@ export class AjaxService {
 
   getOrganizations(): Observable<any> {
     let backup = this.getMLabUrl('organizations');
-    return this.http.get(backup).map((res) => res.json());
-    // return this.http.get(this.interceptUrl + '/organizations').map((res) => res.json());
+    //return this.http.get(backup).map((res) => res.json());
+    return this.http.get(this.interceptUrl + '/organization').map((res) => res.json());
   }
 
   getQuestions(): Observable<any> {
     let backup = this.getMLabUrl('questions');
-    return this.http.get(backup).map((res: Response) => res.json());
-    // return this.http.get(this.interceptUrl + "/questions").map((res: Response) => res.json());
+    //return this.http.get(backup).map((res: Response) => res.json());
+    return this.http.get(this.interceptUrl + "/questions").map((res: Response) => res.json());
   }
 
   submitSurvey(surveyData): Observable<any> {
-    return this.http.post(this.interceptUrl + '/submitSurvey', surveyData).map((res: Response) => res.json());
+//  submitSurvey(surveyData) {
+    return this.http.post(this.interceptUrl + '/surveySubmit', surveyData).map((res: Response) => res.json());
+//    this.http.post(this.interceptUrl + '/surveySubmit', surveyData).map((res: Response) => res.json()).subscribe(
+//        (data) => {
+//            this.rev_orgs = data;
+//            console.log(data);
+//        },
+//        (err) => console.log("Something weird is going on"));
+//      console.log(this.rev_orgs);
+//      console.log("this is type of rev+orgs: " + typeof(this.rev_orgs));
+//      return this.rev_orgs;
+//    return this.rev_orgs;
   }
 }
