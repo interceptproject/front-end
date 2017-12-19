@@ -9,7 +9,7 @@ export class AjaxService {
   apiKey ="dNt29mbxqxK905XC1ZK1mcH60XkjR5gh";
   apiKeyString = "?apiKey=" + this.apiKey;
 
-  interceptUrl = "http://www.interceptproject.org"
+  interceptUrl = "http://www.interceptproject.org:5050"
 //  rev_orgs:Observable<any>;
     rev_orgs = [];
     surveyData;
