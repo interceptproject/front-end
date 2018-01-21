@@ -2,7 +2,23 @@
   <div class="question-box" *ngIf="!isEmergency">
     <div class="flex-col template-radio" *ngIf="templateType == 'radio' || templateType == 'Radio' || templateType == 'YN'">
       <form>
+      <script type="text/javascript">
+            
+          </script>
+        <div id = "moreinfo">
+
+          <img id = "infoicon" src="../../../assets/images/info-icon.png" onclick="
+            if (document.getElementById('infobox').style.display == 'block') {
+              document.getElementById('infobox').style.display = 'none';
+            } else {
+              document.getElementById('infobox').style.display = 'block';
+            }
+          "/>
+          
+          <div id = "infobox"><label for ="question">{{question.moreInfo}}</label></div>
+        </div>
         <h1><label for="question">{{question.questionText}}</label></h1>
+
         <div class="radio" *ngFor="let option of question.answerPossibilities; let i = index"
           (click)="selectOption(i)">
           <label>
