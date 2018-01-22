@@ -17,6 +17,8 @@ import { SurveyFormComponent } from './common/survey-form/survey-form.component'
 import { TabsComponent } from './common/tabs/tabs.component';
 import { SearchResultsComponent } from './common/search-results/search-results.component';
 import { OrganizationProfileComponent } from './organization-profile/organization-profile.component';
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
 import { NavService } from './services/nav.service';
 import { AjaxService } from './services/ajax.service';
 
@@ -31,7 +33,9 @@ import { AjaxService } from './services/ajax.service';
     SurveyFormComponent,
     TabsComponent,
     SearchResultsComponent,
-    OrganizationProfileComponent
+    OrganizationProfileComponent, 
+    ContactComponent, 
+    AboutComponent
   ],
   imports: [
     BrowserModule,
