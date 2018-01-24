@@ -9,7 +9,7 @@ export class AjaxService {
   apiKey ="dNt29mbxqxK905XC1ZK1mcH60XkjR5gh";
   apiKeyString = "?apiKey=" + this.apiKey;
 
-  interceptUrl = "http://www.interceptproject.org:5050"
+  interceptUrl = (location.hostname === "localhost" || location.hostname === "127.0.0.1") ? "http://localhost:5050" : "http://interceptproject.org:5050";
 //  rev_orgs:Observable<any>;
     rev_orgs = [];
     surveyData;
@@ -19,9 +19,11 @@ export class AjaxService {
     return this.mLabUrl + collection + this.apiKeyString;
   }
 
+  
+
   constructor(
     private http: Http) { }
-
+    
   getOrganizations(): Observable<any> {
     let backup = this.getMLabUrl('organizations');
     //return this.http.get(backup).map((res) => res.json());
