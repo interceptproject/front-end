@@ -1,6 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { AjaxService } from './../../services/ajax.service';
+
+export interface Question {
+  questionID: number,
+  questionText: string,
+  questionType: string,
+  answerPossibilities: Answer[]
+}
+
+export interface Answer {
+  text: string,
+  tags: any[],
+  nextQID: number
+}
 
 @Component({
   selector: 'app-survey-form',
@@ -8,14 +21,15 @@ import { AjaxService } from './../../services/ajax.service';
   styleUrls: ['./survey-form.component.scss']
 })
 export class SurveyFormComponent implements OnInit {
-  templateType: string;
-  isSubmitReady: boolean = false;
-  isEmergency: boolean = false;
-  questions = [];
-  rev_orgs = [];
+  @Input() questions: Question[];
+  question: Question;
+  currentIndex: number;
+  answers: Answer[] = [];
+  answer: Answer;
 
-  question;
-  answer;
+  isEmergency: boolean = false;
+  isSubmitReady: boolean = false;
+
   address = {
     street: "",
     city: "",
@@ -27,89 +41,95 @@ export class SurveyFormComponent implements OnInit {
   constructor(private ajxSvc: AjaxService) { }
 
   ngOnInit() {
-    this.initializeSurveyData();
+    console.log('SurveyFormComponent');
+    console.log(this.questions);
+    // this.initializeSurveyData();
+    this.loadQuestion(101);
   }
 
-  initializeSurveyData() {
-    this.ajxSvc.getQuestions().subscribe(
-      (data) => {
-        this.questions = data;
-        console.log(this.questions);
-        this.loadQuestion(101);
-      }, (err) => console.log(err)
-    );
-  }
+  // initializeSurveyData() {
+  //   this.ajxSvc.getQuestions().subscribe(
+  //     (data) => {
+  //       this.questions = data;
+  //       console.log(this.questions);
+  //       this.loadQuestion(101);
+  //     }, (err) => console.log(err)
+  //   );
+  // }
+
 
   loadQuestion(qID: number) {
-    console.log(qID);
-    this.isEmergency = this.checkEmergency(qID);
+    this.checkEmergency(qID);
+
     if (!this.isEmergency) {
-      let notFound = true;
       for (let i = 0; i < this.questions.length; i++) {
         if (this.questions[i].questionID == qID) {
           this.question = this.questions[i];
+          this.currentIndex = i;
           console.log(this.question);
-          this.selectTemplate(this.question.questionType);
-          notFound = false;
+          console.log('currentIndex: ', this.currentIndex);
+          // this.selectTemplate(this.question.questionType);
         }
-      }
-      if (notFound) {
-        this.isSubmitReady = true;
       }
     }
   }
 
   checkEmergency(qID: number) {
-    if (qID == 911) {
-      return true;
-    }
-    return false;
-  }
-
-  selectTemplate(type: string) {
-    this.templateType = type;
+    this.isEmergency = qID == 911 ? true : false;
   }
 
   selectOption(index) {
     this.answer = this.question.answerPossibilities[index];
     console.log(this.answer);
-    if (this.answer.nextQID == 0) {
-      this.isSubmitReady = true;
-    }
+    this.checkIfSubmitReady(this.answer.nextQID);
+  }
+
+  checkIfSubmitReady(nextQID: number) {
+    this.isSubmitReady = nextQID == 0 ? true : false;
   }
 
   prev() {
     console.log('previous!');
+    this.currentIndex--;
+    this.question = this.questions[this.currentIndex];
+    this.answer = null;
   }
 
   next() {
-    if (this.templateType == 'text') {
-      this.answer = this.question.answerPossibilities[0];
-      if (this.address.city == '') {
-        alert('Please enter city');
-        return false;
-      }
-      if (this.address.state == '') {
-        alert('Please enter state');
-        return false;
-      }
-      if (this.address.city !== '' && this.address.state !== '') {
-        console.log('ok');
-        console.log(this.address);
-      }
+    console.log(this.answer);
+    if (this.question.questionType == 'text') {
+      return this.recordUserAddress();
     }
-    this.addTags(this.answer.tags);
+    console.log('h');
+    this.recordAnswer(this.answer);
     this.loadQuestion(this.answer.nextQID);
+    this.answer = null;
   }
 
-  addTags(newTags) {
-    for (let i = 0; i < newTags.length; i++) {
-      let dupes = this.tags.filter(tag => tag == newTags[i]);
-      if (dupes.length == 0) {
-        this.tags.push(newTags[i]);
+  skip() {
+    let nextQuestion = this.questions[this.currentIndex + 1];
+    console.log('nextquestion is: ' + nextQuestion.questionID);
+    this.loadQuestion(nextQuestion.questionID);
+  }
+
+  recordAnswer(answer: Answer) {
+    this.answers.push(answer);
+  }
+
+  recordUserAddress() {
+    console.log(this.address);
+    let message = '';
+    if (this.address.city == '' || this.address.state == '') {
+      if (this.address.city == '') {
+        message += 'Please enter city.\n';
       }
+      if (this.address.state == '') {
+        message += 'Please enter state.';
+      }
+      return alert(message);
     }
-    console.log(this.tags);
+    this.answers.push(null);
+    this.loadQuestion(this.question.answerPossibilities[0].nextQID);
   }
 
   submit() {
@@ -121,7 +141,7 @@ export class SurveyFormComponent implements OnInit {
     console.log(survey);
     this.ajxSvc.surveyData = survey;
 //     this.ajxSvc.submitSurvey(survey).subscribe(
-//       (data) => { 
+//       (data) => {
 //           this.ajxSvc.rev_orgs = data;
 //           console.log(this.ajxSvc.rev_orgs);
 //           console.log(data);

@@ -1,71 +1,62 @@
 <div id="survey-form-component">
   <div class="question-box" *ngIf="!isEmergency">
-    <div class="flex-col template-radio" *ngIf="templateType == 'radio' || templateType == 'Radio' || templateType == 'YN'">
+    <div class="flex-col">
       <form>
-      <script type="text/javascript">
-            
-          </script>
-        <div id = "moreinfo">
+        <h1>
+          <label for="question">{{question.questionText}}</label>
+        </h1>
 
-          <img id = "infoicon" src="../../../assets/images/info-icon.png" onclick="
-            if (document.getElementById('infobox').style.display == 'block') {
-              document.getElementById('infobox').style.display = 'none';
-            } else {
-              document.getElementById('infobox').style.display = 'block';
-            }
-          "/>
-          
-          <div id = "infobox"><label for ="question">{{question.moreInfo}}</label></div>
-        </div>
-        <h1><label for="question">{{question.questionText}}</label></h1>
+        <fieldset *ngIf="question.questionType == 'radio' || question.questionType == 'Radio' || question.questionType == 'YN'">
+          <div class="radio" *ngFor="let option of question.answerPossibilities; let i = index"
+            (click)="selectOption(i)">
+            <label>
+              <input type="radio" name="radioOption" [value]="i">
+               {{option.text}}
+            </label>
+          </div>
+        </fieldset>
 
-        <div class="radio" *ngFor="let option of question.answerPossibilities; let i = index"
-          (click)="selectOption(i)">
-          <label>
-            <input type="radio" name="radioOption" [value]="i"> {{option.text}}
-          </label>
-        </div>
-        <div class="form-btn" *ngIf="!isSubmitReady">
-          <a (click)="prev()">Previous</a>
-          <a (click)="next()">Next</a>
-        </div>
-        <div class="form-btn" *ngIf="isSubmitReady">
-<!--           <a (click)="submit()">Submit</a> -->
-          <a (click)="submit()" [routerLink]="['/search-results']">Submit</a>
-        </div>
-      </form>
-    </div>
+        <fieldset *ngIf="question.questionType == 'text'">
+          <label>Street</label>
+          <input type="text" name="address-street" class="form-control" [(ngModel)]="address.street">
+          <label>City</label>
+          <input type="text" name="address-city" class="form-control"  [(ngModel)]="address.city" required>
+          <label>State</label>
+          <input type="text" name="address-state" class="form-control"  [(ngModel)]="address.state" required>
+          <label>Zipcode</label>
+          <input type="text" name="address-zipcode" class="form-control"  [(ngModel)]="address.zipcode">
+        </fieldset>
 
-    <div class="flex-col template-text" *ngIf="templateType == 'text'">
-      <form>
-        <h1><label for="question">{{question.questionText}}</label></h1>
-        <fieldset>
+        <div class="form-btn" *ngIf="question.questionType == 'text'">
+          <button type="button" name="button" class="btn btn-primary" (click)="recordUserAddress()">Submit</button>
+          <button type="button" name="button" class="btn btn-primary" (click)="skip()">Skip</button>
+        </div>
+
+        <fieldset *ngIf="question.questionType !== 'text'">
+          <div class="form-btn" *ngIf="!isSubmitReady">
+            <button type="button" name="button" class="btn btn-primary"  [disabled]="question.questionID == 101" (click)="prev()">Previous</button>
+            <button type="button" name="button" class="btn btn-primary"  [disabled]="(answer && answer.nextQID == 0) || answer == null" (click)="next()">Next</button>
+            <button type="button" name="button" class="btn btn-primary" (click)="skip()"[disabled]="answer && answer.nextQID == 0">Skip</button>
+          </div>
+          <div class="form-btn" *ngIf="isSubmitReady">
+            <a (click)="submit()">Submit</a>
+          </div>
 
         </fieldset>
-        <label>Street</label>
-        <input type="text" name="address-street" class="form-control" [(ngModel)]="address.street">
-        <label>City</label>
-        <input type="text" name="address-city" class="form-control"  [(ngModel)]="address.city" required>
-        <label>State</label>
-        <input type="text" name="address-state" class="form-control"  [(ngModel)]="address.state" required>
-        <label>Zipcode</label>
-        <input type="text" name="address-zipcode" class="form-control"  [(ngModel)]="address.zipcode">
-        <div class="form-btn" *ngIf="!isSubmitReady">
+      </form>
+        <!-- <div class="form-btn" *ngIf="!isSubmitReady">
           <a (click)="prev()">Previous</a>
           <a (click)="next()">Next</a>
-        </div>
-        <div class="form-btn" *ngIf="isSubmitReady">
-          <!-- <a (click)="submit()">Submit</a> -->
-          <a [routerLink]="'/search-results'">Submit</a>
-        </div>
-      </form>
-    </div>
+        </div> -->
 
+    </div>
   </div>
 
   <div class="flex-col" *ngIf="isEmergency">
-    <h1>Call 911</h1>
-    <a [routerLink]="'/users'">Ok, I will call 911</a>
+    <h1>Call 911 immediately</h1>
+    <button type="button" name="button" class="btn btn-primary">Ok, I will call 911</button>
+    <br>
+    <button type="button" name="button" class="btn btn-default" (click)="isEmergency = false">Back</button>
   </div>
 
   <!-- <div class="flex-col" *ngIf="isSubmitReady">
