@@ -19,19 +19,21 @@ export class AjaxService {
     return this.mLabUrl + collection + this.apiKeyString;
   }
 
-  
+  constructor(private http: Http) { }
 
-  constructor(
-    private http: Http) { }
-    
   getOrganizations(): Observable<any> {
     let backup = this.getMLabUrl('organizations');
     //return this.http.get(backup).map((res) => res.json());
     return this.http.get(this.interceptUrl + '/organization').map((res) => res.json());
   }
 
+  getDummyQuestions(): Observable<any> {
+    return this.http.get('assets/dummy_questions.json')
+      .map((res) => res.json());
+  }
+
   getQuestions(): Observable<any> {
-    let backup = this.getMLabUrl('questions');
+    // let backup = this.getMLabUrl('questions');
     //return this.http.get(backup).map((res: Response) => res.json());
     return this.http.get(this.interceptUrl + "/questions").map((res: Response) => res.json());
   }
