@@ -17,7 +17,7 @@ export const appRoutes: Routes = [
   { path: 'survey', component: SurveyComponent },
   { path: 'survey-form', component: SurveyFormComponent },
   { path: 'search-results', component: SearchResultsComponent },
-  { path: 'organization-profile', component: OrganizationProfileComponent },
+  { path: 'organization-profile/:id', component: OrganizationProfileComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent }
 

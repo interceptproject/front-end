@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { NavService } from './services/nav.service';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
@@ -13,8 +13,17 @@ export class AppComponent implements OnInit {
   constructor(
     private navSvc: NavService
   ) { }
-  
+
   ngOnInit() {
+    this.navSub = this.navSvc.navReposit().subscribe(
+      (data) => {
+        console.log('open!');
+        this.entered = true;
+      }, (err) => console.log(err)
+    );
+  }
+
+  ngOnChanges() {
     this.navSub = this.navSvc.navReposit().subscribe(
       (data) => {
         console.log('open!');
