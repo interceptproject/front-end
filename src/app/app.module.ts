@@ -21,6 +21,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { NavService } from './services/nav.service';
 import { AjaxService } from './services/ajax.service';
+import { RatingComponent } from './organization-profile/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,10 @@ import { AjaxService } from './services/ajax.service';
     SurveyFormComponent,
     TabsComponent,
     SearchResultsComponent,
-    OrganizationProfileComponent, 
-    ContactComponent, 
-    AboutComponent
+    OrganizationProfileComponent,
+    ContactComponent,
+    AboutComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
