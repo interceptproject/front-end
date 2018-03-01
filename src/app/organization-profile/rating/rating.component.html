@@ -14,11 +14,12 @@
     <span class="mr-3" *ngIf="show && rating<2">&#9734;</span>
     <span class="mr-3 rated-solid" *ngIf="show===true && rating>=1">&#9733;</span>
     <span class="mr-3" *ngIf="show && rating<1">&#9734;</span>
-    <span class="mr-3" *ngIf="!show">&#9734;</span>
-    <span class="mr-3" *ngIf="!show">&#9734;</span>
-    <span class="mr-3" *ngIf="!show">&#9734;</span>
-    <span class="mr-3" *ngIf="!show">&#9734;</span>
-    <span class="mr-3" *ngIf="!show">&#9734;</span>
+
+    <span class="mr-3" *ngIf="!show" (click) = "this.rating=5;">&#9734;</span>
+    <span class="mr-3" *ngIf="!show" (click) = "this.rating=4;">&#9734;</span>
+    <span class="mr-3" *ngIf="!show" (click) = "this.rating=3;">&#9734;</span>
+    <span class="mr-3" *ngIf="!show" (click) = "this.rating=2;">&#9734;</span>
+    <span class="mr-3" *ngIf="!show" (click) = "this.rating=1;">&#9734;</span>
   </div>
   <!-- <div class="col-md-9 rating mb-3 flex-row justify-content-left">
 
