@@ -1,0 +1,122 @@
+<div id="survey-component">
+  <div class="quick-exit">
+    <div class="text">
+      <span>
+        Protect yourself online.
+      </span>
+    </div>
+    <div class="button">
+      <a href="https://news.google.com/?hl=en-US&gl=US&ceid=US:en">
+        Quick Exit
+      </a>
+    </div>
+  </div>
+
+  <div class="content">
+    <div
+    class="box"
+    *ngIf="noticeDisplay == 1">
+      <div class="notice">
+        <p>
+          If you have been pimped out, sold for sex, or been forced by your employer to work without pay, you may be in a human trafficking situation.
+        </p>
+        <p>
+          If you need shelter, couseling, rescue/pickup, drug rehabilitation or just help, click "Seeking Help" below. Based on information you provide, we will direct you to the best resources.
+        </p>
+        <p>
+          Note: This platform is designed for those affected by human trafficking. If you are not affected by human trafficking, but suffering from domestic violence, pelase call the National Domestic Violence Hotline at <span class="alert-text"> 1-800-799-7233</span>.
+        </p>
+        <div class="button-wrapper">
+          <button
+          type="button"
+          class="btn btn-primary"
+          (click)="noticeDisplay = 2">
+            Seeking Help
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+    class="box"
+    *ngIf="noticeDisplay == 2">
+      <div class="notice">
+        <p>
+          If you are in danger, please call Emergecy Services at <span class="alert-text">911</span>.
+        </p>
+        <p>
+          Take 5 minutes to answer the following quesitons. We will use the answers to find the best resources to help you with your situation. When you finish, you will have an option to save your answers. Saved answers can be retreived for later use: for example, when you visit an organization, you can provide them with the basic information easily and quickly by retriving your saved answers.
+        </p>
+        <p>
+          All your answers is confidentail and will not be shared with anyone without your consent.
+        </p>
+        <div class="button-wrapper">
+          <button
+          type="button"
+          class="btn btn-secondary btn-block"
+          (click)="noticeDisplay = 0">
+            Got it
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+    class="box"
+    *ngIf="noticeDisplay == 0">
+    <div class="progress-bar">
+      <progressbar
+      type="success"
+      [max]="questions.length"
+      [value]="currentQ">
+      </progressbar>
+    </div>
+    <div class="options-bar">
+      <div class="pref">
+        <button
+        type="button"
+        class="btn btn-link">
+          Previous
+        </button>
+      </div>
+      <div class="info">
+        <button
+        type="button"
+        class="btn btn-link">
+          Why asking?
+        </button>
+      </div>
+      <div class="skip">
+        <button
+        type="button"
+        class="btn btn-light btn-link">
+          Skip
+        </button>
+      </div>
+    </div>
+    <div class="question-bar">
+      <div class="question">
+        I need
+      </div>
+      <div class="answer">
+
+      </div>
+    </div>
+    <div class="next-bar">
+      <button
+      type="button"
+      class="btn btn-primary btn-block">
+        Next
+      </button>
+    </div>
+
+      <!-- <button
+      type="button"
+      class="btn btn-secondary btn-lg btn-block">
+        Got it
+      </button> -->
+    </div>
+
+  </div>
+
+</div>

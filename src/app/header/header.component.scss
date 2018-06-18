@@ -1,0 +1,26 @@
+@import "~sass/_variables";
+
+#header-component {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  height: 30px;
+  background-color: $light-blue;
+  .language-header {
+    height: 30px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 300;
+    font-family: $default-foreign;
+    color: white;
+    .language {
+      padding: 0px 15px;
+    }
+    .selected {
+      font-weight: 500;
+    }
+  }
+}

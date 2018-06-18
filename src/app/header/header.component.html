@@ -1,0 +1,13 @@
+<div id="header-component">
+  <div class="language-header">
+    <div
+    class="language"
+    [ngClass]="{'selected': language.set}"
+    *ngFor="let language of languageOptions; let i = index">
+      <span class="title"
+      (click)="setLanguage(i)">
+        <a href="#">{{language.title}}</a>
+      </span>
+    </div>
+  </div>
+</div>
