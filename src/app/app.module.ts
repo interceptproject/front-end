@@ -3,13 +3,17 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { NavComponent } from './main/nav/nav.component';
 import { SurveyComponent } from './main/survey/survey.component';
+import { QuestionBoxComponent } from './main/survey/question-box/question-box.component';
 
+import { SurveyService } from './services/survey.service';
+import { OrganizationListComponent } from './main/organization-list/organization-list.component';
 
 @NgModule({
   declarations: [
@@ -17,15 +21,20 @@ import { SurveyComponent } from './main/survey/survey.component';
     HeaderComponent,
     MainComponent,
     NavComponent,
-    SurveyComponent
+    SurveyComponent,
+    QuestionBoxComponent,
+    OrganizationListComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     AppRoutingModule,
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    PopoverModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    SurveyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,89 @@
+<div id="question-box-component">
+  <div class="progress-bar">
+    <progressbar
+    type="success"
+    [max]="questions.length"
+    [value]="current.index + 1">
+    </progressbar>
+  </div>
+  <div class="options-bar">
+    <div class="pref">
+      <button
+      type="button"
+      class="btn btn-link"
+      (click)="previous(current.index)">
+        Previous
+      </button>
+    </div>
+    <div class="info">
+      <button
+      type="button"
+      class="btn btn-link"
+      triggers="focus"
+      placement="bottom"
+      [popover]="current.question.helpText">
+        Why asking?
+      </button>
+    </div>
+    <div class="skip">
+      <button
+      type="button"
+      class="btn btn-light btn-link"
+      [disabled]="current.index == questions.length - 1"
+      (click)="skip(current.index)">
+        Skip
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="question-text">
+      <span>{{current.question.questionText}}</span>
+    </div>
+    <div
+    class="answer-options"
+    *ngIf="current.question.answerOptions.type == 'multi-selection'">
+      <div
+      class="answer-option"
+      *ngFor="let option of current.answerOptions; let optionI = index">
+        <span
+        class="text"
+        [ngClass]="{'selected': option.selected}"
+        (click)="selectOption(optionI)">
+          {{option.text}}
+        </span>
+      </div>
+
+    </div>
+    <div
+    class="next"
+    *ngIf="current.index !== questions.length - 1">
+      <button
+      type="button"
+      class="btn btn-block btn-primary"
+      [disabled]="!checkAnswerSelected()"
+      (click)="next(current.index)">
+        Next
+      </button>
+    </div>
+    <div
+    class="next"
+    *ngIf="current.index == questions.length - 1">
+      <button
+      type="button"
+      class="btn btn-block btn-primary"
+      [disabled]="!checkAnswerSelected()"
+      (click)="submit(current.index, true)">
+        Save & Submit
+      </button>
+      <button
+      type="button"
+      class="btn btn-block btn-primary"
+      [disabled]="!checkAnswerSelected()"
+      (click)="submit(current.index, false)">
+        Submit
+      </button>
+    </div>
+  </div>
+
+</div>

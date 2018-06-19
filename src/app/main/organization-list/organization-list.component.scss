@@ -1,0 +1,35 @@
+@import "~sass/_variables";
+
+#organization-list-component {
+  padding: 25px;
+  font-size: 13px;
+  .instruction {
+    max-width: 900px;
+    margin: auto;
+    .surveyID {
+      font-size: 15px;
+    }
+  }
+  .result {
+    max-width: 900px;
+    margin: 15px auto;
+    .list {
+      margin-top: 10px;
+      border: 2px solid $light-blue;
+      border-radius: 10px;
+      padding: 15px 20px;
+
+      .organization {
+        .name {
+          font-size: 15px;
+        }
+        .address {
+          font-size: 13px;
+          color: grey;
+        }
+      }
+      /* background-color: $lightest-blue; */
+    }
+  }
+
+}

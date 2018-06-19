@@ -36,39 +36,40 @@
     font-size: 14px;
     .box {
       width: 550px;
+      min-height: 285px;
       margin-top: 25px;
       box-shadow: 1px 1px 3px grey;
-      .notice {
-        padding: 13px 20px;
-        .button-wrapper {
-          text-align: center;
-        }
-      }
-      .progress-bar {
-        /* margin-bottom: 15px; */
-        height: 8px;
-      }
-      .options-bar {
+      padding: 15px 20px;
+      .display {
+        min-height: 200px;
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: column nowrap;
         justify-content: space-around;
-        .prev {
-          width: 100px;
-          text-align: left;
-        }
-        .info {
-          width: 350px;
+        .question-text {
           text-align: center;
+          font-size: 16px;
+          font-weight: 500;
         }
-        .skip {
-          width: 100px;
-          text-align: right;
+        .answer-options {
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: center;
+          .service {
+            padding: 8px 12px;
+            background-color: $lightest-blue;
+            border-radius: 10px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            cursor: pointer
+          }
+          .selected {
+            background-color: $blue;
+            color: white;
+          }
         }
       }
-      .question-bar {
-        .quesiton {
-          text-align: center;
-        }
+      .button-wrapper {
+        text-align: center;
       }
     }
   }

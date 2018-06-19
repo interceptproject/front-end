@@ -1,0 +1,39 @@
+<div id="organization-list-component">
+  <div class="instruction">
+
+    <div *ngIf="surveyID">
+      <div class="surveyID">
+        Your Survey ID: {{surveyID}}
+      </div>
+      <div class="">
+        You may use your survey ID to get the up-to-date list of organizations that can help you.
+      </div>
+    </div>
+  </div>
+  <div class="result">
+    We have found {{organizations.length}} organization(s) based on your answers.
+    <div class="list">
+      <div class="organization"
+      *ngFor="let org of organizations">
+        <div class="name">
+          {{org.name}}
+        </div>
+        <div class="address">
+          {{org.location.public.fullAddress}}
+        </div>
+        <div class="contact">
+          <span class="phone">
+            {{org.contact.main}}
+          </span>
+          <span class="website">
+            {{org.website}}
+          </span>
+          <span class="email">
+            {{org.contact.email}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

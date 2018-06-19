@@ -13,7 +13,9 @@
       class="menu-item"
       [ngClass]="{'selected': item.set}"
       *ngFor="let item of menuItems">
-        {{item.name}}
+        <a [routerLink]="[item.url]">
+          {{item.name}}
+        </a>
       </div>
     </div>
   </div>
