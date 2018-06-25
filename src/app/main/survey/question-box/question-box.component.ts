@@ -2,23 +2,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 
-export interface Question {
-  category: string,
-  core: boolean,
-  questionText: string,
-  helpText: string,
-  questionID: number,
-  answerOptions: {
-    type: string,
-    selection: AnswerOption[]
-  }
-}
-
-export interface AnswerOption {
-  id: number,
-  selected: boolean,
+export interface Selection {
   text: string,
-  tags: number[]
+  targets: number[],
+  services: number[],
+  specializations: number[],
+  requirements: number[]
 }
 
 @Component({
@@ -27,22 +16,28 @@ export interface AnswerOption {
   styleUrls: ['./question-box.component.scss']
 })
 export class QuestionBoxComponent implements OnInit {
-  @Input() questions: Question[];
+  @Input() questions: any[];
   current: {
     index: number,
-    question: Question,
-    answerOptions: AnswerOption[]
+    question: any
   } = {
     index: 0,
-    question: null,
-    answerOptions: null
+    question: null
   };
-  answers: AnswerOption[] = []; // use index against questions array to find matching questionID
+  isAnswered: boolean = false;
+  radioOptions: {
+    selected: boolean,
+    option: Selection[]
+  }[] = [];
+  textInput: string;
+  dropDown: any;
+
+  answers: any[][] = []; // use index against questions array to find matching questionID
   @Output() sendAnswers = new EventEmitter<{
     save: boolean,
-    answers: AnswerOption[]
+    answers: any[]
   }>();
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -51,14 +46,31 @@ export class QuestionBoxComponent implements OnInit {
   }
 
   loadQuestion(index: number) {
-    this.current.index = index;
-    this.current.question = this.questions[index];
-    this.current.answerOptions = this.current.question.answerOptions.selection;
+    this.current = {
+      index: index,
+      question : this.questions[index]
+    };
     console.log(this.current);
+    this.loadAnswerOptions(this.current.question.display);
   }
 
-  setAnswerOptions(options) {
+  loadAnswerOptions(display: string) {
+    console.log(display);
+    if (display == 'radio') {
+      this.radioOptions = this.current.question.answer_options.selection.map(option => {
+        return {
+          selected: false,
+          option: option
+        };
+      })
+    }
+    if (display == 'drop-down') {
 
+    }
+    if (display == 'location') {
+      this.textInput = null;
+      console.log(this.textInput);
+    }
   }
 
   previous(currentIndex: number) {
@@ -78,40 +90,73 @@ export class QuestionBoxComponent implements OnInit {
     this.go(true, currentIndex);
   }
 
-  selectOption(optionIndex: number) {
-    for (let i = 0; i < this.current.answerOptions.length; i++) {
-      this.current.answerOptions[i].selected = i == optionIndex ? true : false;
+  clickRadioOption(index: number) {
+    if (this.current.question.answer_options.type == 'single-selection') {
+      for (let i = 0; i < this.radioOptions.length; i++) {
+        this.radioOptions[i].selected = i == index ? !this.radioOptions[i].selected : false;
+      }
     }
+    if (this.current.question.answer_options.type == 'multi-selection') {
+      this.radioOptions[index].selected = !this.radioOptions[index].selected;
+    }
+    console.log(this.radioOptions);
+    this.checkIfAnswered('radio');
   }
 
-  checkAnswerSelected() {
-    return this.current.answerOptions.filter(option => option.selected).length;
+  enteringZipcode(value) {
+    console.log(value);
+    this.textInput = value;
+    console.log(this.textInput);
+    this.checkIfAnswered(this.current.question.display);
+  }
+
+  checkIfAnswered(display: string) {
+    if (display == 'radio') {
+      console.log('is radio option selected');
+      console.log(this.radioOptions.filter(option => option.selected).length);
+      return this.isAnswered = this.radioOptions.filter(option => option.selected).length ? true : false;
+    }
+    if (display == 'drop-down') {
+
+    }
+    if (display == 'location') {
+      console.log('is locaiton answered');
+      console.log(this.textInput);
+      return this.isAnswered = this.textInput ? true : false;
+    }
   }
 
   next(currentIndex: number) {
-    this.setAnswer(this.getSelected(currentIndex), currentIndex);
-    this.go(true, currentIndex);
-  }
-
-  getSelected(currentIndex: number) {
-    for (let i = 0; i < this.current.answerOptions.length; i++) {
-      if (this.current.answerOptions[i].selected) {
-        return this.current.answerOptions[i];
-      }
+    if (this.current.question.display == 'radio') {
+      const selected = this.radioOptions.filter(option => option.selected);
+      console.log(selected);
+      this.setAnswer(selected, currentIndex);
     }
+    if (this.current.question.display == 'drop-down') {
+      // this.setAnswer([this.location], currentIndex);
+    }
+    if (this.current.question.display == 'location') {
+      this.setAnswer([this.textInput], currentIndex);
+    }
+    this.go(true, currentIndex);
+    console.log(this.answers);
   }
 
-  setAnswer(selected: AnswerOption, currentIndex: number) {
-    this.answers[currentIndex] = selected;
+  setAnswer(answer: any[], currentIndex: number) {
+    this.answers[currentIndex] = answer;
   }
 
   go(forward: boolean, currentIndex: number) {
     forward ? currentIndex++ : currentIndex--;
     this.loadQuestion(currentIndex);
+    this.checkIfAnswered(this.current.question.display);
   }
 
   submit(currentIndex: number, saveOption: boolean) {
-    this.setAnswer(this.getSelected(currentIndex), currentIndex);
+    // this.setAnswer(this.getSelected(currentIndex), currentIndex);
+    console.log(this.current);
+    console.log(this.answers);
+
     this.sendAnswers.emit({
       save: saveOption,
       answers: this.answers

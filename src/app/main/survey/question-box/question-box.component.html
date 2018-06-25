@@ -21,7 +21,7 @@
       class="btn btn-link"
       triggers="focus"
       placement="bottom"
-      [popover]="current.question.helpText">
+      [popover]="current.question.help_text">
         Why asking?
       </button>
     </div>
@@ -37,31 +37,59 @@
   </div>
 
   <div class="content">
-    <div class="question-text">
-      <span>{{current.question.questionText}}</span>
+    <div class="question-wrapper">
+      <span>{{current.question.question_text}}</span>
     </div>
-    <div
-    class="answer-options"
-    *ngIf="current.question.answerOptions.type == 'multi-selection'">
+    <div class="answer-wrapper">
       <div
-      class="answer-option"
-      *ngFor="let option of current.answerOptions; let optionI = index">
-        <span
-        class="text"
-        [ngClass]="{'selected': option.selected}"
-        (click)="selectOption(optionI)">
-          {{option.text}}
-        </span>
+      class="template"
+      [ngClass]="{
+        'radio': current.question.question_id !== 1,
+        'ineed': current.question.question_id == 1}"
+      *ngIf="current.question.display == 'radio'">
+        <div
+        class="radio-option"
+        *ngFor="let option of radioOptions; let i = index">
+          <span
+          class="text"
+          [ngClass]="{'selected': option.selected}"
+          (click)="clickRadioOption(i)">
+            {{option.option.text}}
+          </span>
+        </div>
       </div>
-
+      <div
+      class="template dropdown"
+      *ngIf="current.question.display == 'drop-down'">
+        dropdown here
+      </div>
+      <div
+      class="template location"
+      *ngIf="current.question.display == 'location'">
+        <div class="locaiton-item zipcode">
+          <input
+          type="text"
+          name="location"
+          class="form-control input-sm"
+          placeholder="Enter zipcode"
+          (change)="enteringZipcode($event.target.value)">
+        </div>
+        <div class="location-item or">
+          <span>Or</span>
+        </div>
+        <div class="locaiton-item atlanta">
+          <button
+          type="button"
+          class="btn btn-primary"
+          (click)="enteringZipcode('Atlanta')">Atlanta</button>
+        </div>
+      </div>
     </div>
-    <div
-    class="next"
-    *ngIf="current.index !== questions.length - 1">
+    <div class="next">
       <button
       type="button"
       class="btn btn-block btn-primary"
-      [disabled]="!checkAnswerSelected()"
+      [disabled]="!isAnswered"
       (click)="next(current.index)">
         Next
       </button>
@@ -72,7 +100,7 @@
       <button
       type="button"
       class="btn btn-block btn-primary"
-      [disabled]="!checkAnswerSelected()"
+      [disabled]="!isAnswered"
       (click)="submit(current.index, true)">
         Save & Submit
       </button>

@@ -50,23 +50,6 @@
           font-size: 16px;
           font-weight: 500;
         }
-        .answer-options {
-          display: flex;
-          flex-flow: row wrap;
-          justify-content: center;
-          .service {
-            padding: 8px 12px;
-            background-color: $lightest-blue;
-            border-radius: 10px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            cursor: pointer
-          }
-          .selected {
-            background-color: $blue;
-            color: white;
-          }
-        }
       }
       .button-wrapper {
         text-align: center;

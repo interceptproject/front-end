@@ -32,28 +32,72 @@
     align-items: center;
     text-align: center;
     font-size: 15px;
-    .question-text {
+    .question-wrapper {
       width: 100%;
       margin-top: 15px;
       margin-bottom: 15px;
     }
-    .answer-options {
+    .answer-wrapper {
       width: 100%;
       margin-bottom: 20px;
-      .answer-option {
-        line-height: 40px;
-        .text {
-          padding: 8px 12px;
-          background-color: $lightest-blue;
-          border-radius: 10px;
-          cursor: pointer;
+      .template {
+        display: flex;
+      }
+      .radio {
+        flex-flow: row wrap;
+        justify-content: center;
+        .radio-option {
+          flex: 100%;
+          line-height: 35px;
+          margin-bottom: 10px;
+          .text {
+            padding: 8px 12px;
+            background-color: $lightest-blue;
+            border-radius: 10px;
+            cursor: pointer;
+
+          }
+          .selected {
+            background-color: $blue;
+            color: white;
+          }
         }
-        .selected {
-          background-color: $blue;
-          color: white;
+      }
+      .ineed {
+        flex-flow: row wrap;
+        justify-content: center;
+        /* align-items: space-around; */
+        .radio-option {
+          line-height: 35px;
+          margin: 4px;
+          .text {
+            padding: 8px 12px;
+            background-color: $lightest-blue;
+            border-radius: 10px;
+            cursor: pointer;
+          }
+          .selected {
+            background-color: $blue;
+            color: white;
+          }
+        }
+      }
+      .dropdown {
+
+      }
+      .location {
+        flex-flow: row wrap;
+        justify-content: center;
+        .location-item {
+          flex: 100%;
+        }
+        .or {
+          line-height: 33px;
         }
       }
     }
+
+
     .next {
       align-self: flex-end;
       width: 100%;

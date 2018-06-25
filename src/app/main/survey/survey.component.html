@@ -31,7 +31,7 @@
         <button
         type="button"
         class="btn btn-primary"
-        (click)="initialDisplay = 2">
+        (click)="setInitialDisplay(2)">
           Seeking Help
         </button>
       </div>
@@ -54,37 +54,10 @@
           <button
           type="button"
           class="btn btn-primary"
-          (click)="initialDisplay = 3">
+          (click)="startSurvey()">
             Got it
           </button>
         </div>
-      </div>
-    </div>
-
-    <div
-    class="box"
-    *ngIf="initialDisplay == 3">
-      <div class="display">
-        <div class="question-text">
-          I need...
-        </div>
-        <div class="answer-options">
-          <div
-          class="service"
-          [ngClass]="{'selected': service.selected}"
-          (click)="selectService(serviceI)"
-          *ngFor="let service of services; let serviceI = index">
-            {{service.name}}
-          </div>
-        </div>
-      </div>
-      <div class="button-wrapper">
-        <button
-        type="button"
-        class="btn btn-primary"
-        (click)="startSurvey()">
-          Next
-        </button>
       </div>
     </div>
 
@@ -96,11 +69,6 @@
       (sendAnswers)="receieveAnswers($event)">
       </app-question-box>
     </div>
-    <!-- <app-question-box
-    [questions]="questions"
-    (sendAnswers)="receieveAnswers($event)"
-    *ngIf="initialDisplay == 0">
-    </app-question-box> -->
   </div>
 
 </div>
