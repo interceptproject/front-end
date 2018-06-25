@@ -30,8 +30,12 @@ export class QuestionBoxComponent implements OnInit {
     option: Selection[]
   }[] = [];
   textInput: string;
-  dropDown: any;
-
+  textInputInvalid: boolean = false;
+  dropDownOptions: {
+    selected: boolean,
+    option: any
+  }[] = [];
+  surveyComplete: boolean = false;
   answers: any[][] = []; // use index against questions array to find matching questionID
   @Output() sendAnswers = new EventEmitter<{
     save: boolean,
@@ -51,7 +55,10 @@ export class QuestionBoxComponent implements OnInit {
       question : this.questions[index]
     };
     console.log(this.current);
-    this.loadAnswerOptions(this.current.question.display);
+    if (this.current.question) {
+      this.loadAnswerOptions(this.current.question.display);
+    }
+
   }
 
   loadAnswerOptions(display: string) {
@@ -65,7 +72,16 @@ export class QuestionBoxComponent implements OnInit {
       })
     }
     if (display == 'drop-down') {
-
+      this.dropDownOptions = [{
+        selected: false,
+        option: 'USA'
+      }, {
+        selected: false,
+        option: 'Canada'
+      }, {
+        selected: false,
+        option: 'Mexico'
+      }];
     }
     if (display == 'location') {
       this.textInput = null;
@@ -103,11 +119,33 @@ export class QuestionBoxComponent implements OnInit {
     this.checkIfAnswered('radio');
   }
 
-  enteringZipcode(value) {
+  selectDropDownOption(index: number) {
+    console.log(index);
+    for (let i = 0; i < this.dropDownOptions.length; i++) {
+      this.dropDownOptions[i].selected = i == index ? true : false;
+    }
+    this.checkIfAnswered('drop-down');
+  }
+
+  updatingTextInput(value) {
     console.log(value);
-    this.textInput = value;
-    console.log(this.textInput);
+    this.textInputInvalid = false;
+    this.textInput = null;
+    if (this.current.question.display == 'location') {
+      if (value !== 'Atlanta') {
+        this.textInputInvalid = !this.validateZipcode(value);
+      }
+      if (!this.textInputInvalid) {
+        this.textInput = value;
+      }
+      console.log(this.textInput);
+    }
     this.checkIfAnswered(this.current.question.display);
+  }
+
+  validateZipcode(value: string) {
+    const zipcode = new RegExp(/^\d{5}$/);
+    return zipcode.test(value);
   }
 
   checkIfAnswered(display: string) {
@@ -117,7 +155,8 @@ export class QuestionBoxComponent implements OnInit {
       return this.isAnswered = this.radioOptions.filter(option => option.selected).length ? true : false;
     }
     if (display == 'drop-down') {
-
+      console.log(this.dropDownOptions.filter(option => option.selected).length);
+      return this.isAnswered = this.dropDownOptions.filter(option => option.selected).length ? true : false;
     }
     if (display == 'location') {
       console.log('is locaiton answered');
@@ -128,12 +167,10 @@ export class QuestionBoxComponent implements OnInit {
 
   next(currentIndex: number) {
     if (this.current.question.display == 'radio') {
-      const selected = this.radioOptions.filter(option => option.selected);
-      console.log(selected);
-      this.setAnswer(selected, currentIndex);
+      this.setAnswer(this.extractSelectedOptions(this.radioOptions), currentIndex);
     }
     if (this.current.question.display == 'drop-down') {
-      // this.setAnswer([this.location], currentIndex);
+      this.setAnswer(this.extractSelectedOptions(this.dropDownOptions), currentIndex);
     }
     if (this.current.question.display == 'location') {
       this.setAnswer([this.textInput], currentIndex);
@@ -142,21 +179,31 @@ export class QuestionBoxComponent implements OnInit {
     console.log(this.answers);
   }
 
+  extractSelectedOptions(options: any[]) {
+    let arr = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        arr.push(options[i].option);
+      }
+    }
+    return arr;
+  }
+
   setAnswer(answer: any[], currentIndex: number) {
     this.answers[currentIndex] = answer;
   }
 
   go(forward: boolean, currentIndex: number) {
     forward ? currentIndex++ : currentIndex--;
+    if (currentIndex >= this.questions.length) {
+      return this.surveyComplete = true;
+    }
     this.loadQuestion(currentIndex);
     this.checkIfAnswered(this.current.question.display);
   }
 
-  submit(currentIndex: number, saveOption: boolean) {
-    // this.setAnswer(this.getSelected(currentIndex), currentIndex);
-    console.log(this.current);
+  submit(saveOption: boolean) {
     console.log(this.answers);
-
     this.sendAnswers.emit({
       save: saveOption,
       answers: this.answers

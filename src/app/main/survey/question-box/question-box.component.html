@@ -21,7 +21,8 @@
       class="btn btn-link"
       triggers="focus"
       placement="bottom"
-      [popover]="current.question.help_text">
+      [popover]="current.question.help_text"
+      [disabled]="surveyComplete">
         Why asking?
       </button>
     </div>
@@ -29,14 +30,16 @@
       <button
       type="button"
       class="btn btn-light btn-link"
-      [disabled]="current.index == questions.length - 1"
+      [disabled]="surveyComplete"
       (click)="skip(current.index)">
         Skip
       </button>
     </div>
   </div>
 
-  <div class="content">
+  <div
+  class="content"
+  *ngIf="!surveyComplete">
     <div class="question-wrapper">
       <span>{{current.question.question_text}}</span>
     </div>
@@ -61,7 +64,17 @@
       <div
       class="template dropdown"
       *ngIf="current.question.display == 'drop-down'">
-        dropdown here
+        <select
+        class="form-control input-sm"
+        name="dropdown"
+        (change)="selectDropDownOption($event.target.value)">
+          <option disabled>Select</option>
+          <option
+          [value]="optionI"
+          *ngFor="let option of dropDownOptions; let optionI = index">
+            {{option.option}}
+          </option>
+        </select>
       </div>
       <div
       class="template location"
@@ -71,8 +84,12 @@
           type="text"
           name="location"
           class="form-control input-sm"
+          [ngClass]="{'invalid': textInputInvalid}"
           placeholder="Enter zipcode"
-          (change)="enteringZipcode($event.target.value)">
+          (change)="updatingTextInput($event.target.value)">
+        </div>
+        <div class="help-text" *ngIf="textInputInvalid">
+          Please provide a valid zip (Example: 30306)
         </div>
         <div class="location-item or">
           <span>Or</span>
@@ -81,7 +98,7 @@
           <button
           type="button"
           class="btn btn-primary"
-          (click)="enteringZipcode('Atlanta')">Atlanta</button>
+          (click)="updatingTextInput('Atlanta')">Atlanta</button>
         </div>
       </div>
     </div>
@@ -94,24 +111,27 @@
         Next
       </button>
     </div>
-    <div
-    class="next"
-    *ngIf="current.index == questions.length - 1">
-      <button
-      type="button"
-      class="btn btn-block btn-primary"
-      [disabled]="!isAnswered"
-      (click)="submit(current.index, true)">
-        Save & Submit
-      </button>
-      <button
-      type="button"
-      class="btn btn-block btn-primary"
-      [disabled]="!checkAnswerSelected()"
-      (click)="submit(current.index, false)">
-        Submit
-      </button>
-    </div>
+  </div>
+
+  <div class="content"
+  *ngIf="surveyComplete">
+  <div class="question-wrapper">
+    Thank you! You have answered all the questions.
+  </div>
+  <div class="next">
+    <button
+    type="button"
+    class="btn btn-block btn-primary"
+    (click)="submit(true)">
+      Save & Submit
+    </button>
+    <button
+    type="button"
+    class="btn btn-block btn-primary"
+    (click)="submit(false)">
+      Submit
+    </button>
+  </div>
   </div>
 
 </div>

@@ -238,7 +238,7 @@ export class SurveyService {
 {
     "category" : "requirement",
     "core" : true,
-    "question_text" : "Do you have dependents coming with you?",
+    "question_text" : "Do  have dependents coming with you?",
     "help_text" : "Some organizations do not allow people to take their children with them, while some do. If you have dependents coming with you, this information will be used to find organizations that will allow you to bring them.",
     "question_id" : 6,
     "display" : "radio",
@@ -265,7 +265,7 @@ export class SurveyService {
 {
     "category" : "specialization",
     "core" : true,
-    "question_text" : "Select all that apply to you",
+    "question_text" : "Select all that apply to you.",
     "help_text" : "Some organizations are especially capable to serve certain demographics. If you are any of the above demographics, this information will be used to find organizations that have specialized competencies toward those groups.",
     "question_id" : 7,
     "display" : "radio",
