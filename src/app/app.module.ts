@@ -15,6 +15,7 @@ import { QuestionBoxComponent } from './main/survey/question-box/question-box.co
 
 import { SurveyService } from './services/survey.service';
 import { OrganizationListComponent } from './main/organization-list/organization-list.component';
+import { AjaxService } from './services/ajax.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { OrganizationListComponent } from './main/organization-list/organization
     PopoverModule.forRoot()
   ],
   providers: [
-    SurveyService
+    SurveyService,
+    AjaxService
   ],
   bootstrap: [AppComponent]
 })

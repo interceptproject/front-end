@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { AjaxService } from './../../services/ajax.service';
 
 @Component({
   selector: 'app-organization-list',
@@ -32,7 +33,8 @@ export class OrganizationListComponent implements OnInit {
   surveyID: string = '20102';
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ajaxService: AjaxService
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,11 @@ export class OrganizationListComponent implements OnInit {
         //use query params to get search result & survey record
       }, (err) => console.log(err)
     );
+  }
+  
+  test() {
+    console.log("HAIKEBUCKALOO");
+    this.ajaxService.test();
   }
 
 }
