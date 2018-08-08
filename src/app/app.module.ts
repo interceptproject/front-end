@@ -16,6 +16,7 @@ import { QuestionBoxComponent } from './main/survey/question-box/question-box.co
 import { SurveyService } from './services/survey.service';
 import { OrganizationListComponent } from './main/organization-list/organization-list.component';
 import { AjaxService } from './services/ajax.service';
+import { OrganizationBoxComponent } from './main/organization-list/organization-box/organization-box.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AjaxService } from './services/ajax.service';
     NavComponent,
     SurveyComponent,
     QuestionBoxComponent,
-    OrganizationListComponent
+    OrganizationListComponent,
+    OrganizationBoxComponent
   ],
   imports: [
     BrowserModule,
