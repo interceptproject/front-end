@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
     set: boolean
   }[] = [{
     name: 'Home',
-    url: '',
+    url: '/survey',
     set: true
   }, {
     name: 'About',

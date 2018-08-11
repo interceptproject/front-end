@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { SurveyService } from './../../services/survey.service';
 
@@ -27,19 +27,35 @@ export interface Question {
   styleUrls: ['./survey.component.scss']
 })
 export class SurveyComponent implements OnInit {
+  //For allowing clicking on home in survey component to reset survey component
+  navigationSubscription;
+
   initialDisplay: number;
   questions: any[];
 
   constructor(
     private router: Router,
     private surveySvc: SurveyService
-  ) { }
+  ) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.reinitialize();
+      }
+    });
+   }
 
   ngOnInit() {
     
     //Load up initial display first
     this.setInitialDisplay(1);
 
+  }
+
+  //Used to reinitialize component. Home button in nav redirects to /survey, and allows for clicking home in
+  // the /survey component to 'refresh' the component
+  reinitialize() {
+    this.setInitialDisplay(1);
   }
 
   setInitialDisplay(number: number) {
@@ -74,6 +90,15 @@ export class SurveyComponent implements OnInit {
         service: null
       }
     });
+  }
+
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we  
+    // don't then we will continue to run our initialiseInvites()   
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {  
+       this.navigationSubscription.unsubscribe();
+    }
   }
 
 }

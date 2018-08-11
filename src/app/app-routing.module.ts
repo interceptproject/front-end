@@ -5,12 +5,12 @@ import { SurveyComponent } from './main/survey/survey.component';
 
 export const appRoutes: Routes = [
   {path: 'organizations', component: OrganizationListComponent},
-  {path: 'survey', component: SurveyComponent},
+  {path: 'survey', component: SurveyComponent, runGuardsAndResolvers: 'always'},
   {path: '', component: SurveyComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, {onSameUrlNavigation : 'reload'})],
   exports: [RouterModule]
 })
 
