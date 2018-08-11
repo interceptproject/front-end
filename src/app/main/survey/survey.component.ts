@@ -36,8 +36,10 @@ export class SurveyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.setInitialDisplay(1);
-    this.startSurvey();
+    
+    //Load up initial display first
+    this.setInitialDisplay(1);
+
   }
 
   setInitialDisplay(number: number) {

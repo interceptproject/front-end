@@ -30,5 +30,4 @@ export class HeaderComponent implements OnInit {
       index == i ? this.languageOptions[index].set = true : this.languageOptions[index].set = false;
     }
   }
-
 }
