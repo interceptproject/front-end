@@ -15,14 +15,6 @@ export class NavComponent implements OnInit {
     url: '',
     set: true
   }, {
-    name: 'NGO Registration',
-    url: '/ngo',
-    set: false
-  }, {
-    name: 'Volunteer',
-    url: '/',
-    set: false
-  }, {
     name: 'About',
     url: '/',
     set: false,

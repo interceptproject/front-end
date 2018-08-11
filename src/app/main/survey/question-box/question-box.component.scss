@@ -6,14 +6,18 @@
   margin-top: 25px;
   box-shadow: 1px 1px 3px grey; */
   .progress-bar {
-    height: 8px;
+//    height: 8px;
+  height: 15px;
+  border-radius: 7.5px;
+  background-color: #f5f5f5;
   }
   .options-bar {
     height: 38px;
     display: flex;
     flex-flow: row nowrap;
     .prev {
-      width: 100px;
+      width: 113.3px;
+      height: 28px;
       text-align: left;
     }
     .info {
@@ -112,6 +116,7 @@
       flex-flow: row wrap;
       justify-content: center;
       align-items: center;
+
     }
   }
 

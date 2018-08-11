@@ -13,15 +13,7 @@ export interface LanguageOption {
 })
 export class HeaderComponent implements OnInit {
   languageOptions: LanguageOption[] = [{
-    name: 'Japanese', title: '日本語', set: false
-  }, {
-    name: 'Chinese', title: '中文', set: false
-  }, {
     name: 'English', title: 'English', set: true
-  }, {
-    name: 'Spanish', title: 'Español', set: false
-  }, {
-    name: 'French', title: 'French', set: false
   }];
 
   constructor() { }
