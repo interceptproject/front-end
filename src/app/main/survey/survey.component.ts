@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { SurveyService } from './../../services/survey.service';
+import { AjaxService } from './../../services/ajax.service';
 
 //TODO:: make it to Model later
 //Question model needs to have service ID - 'category'(string) is not enough
@@ -35,7 +36,9 @@ export class SurveyComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private surveySvc: SurveyService
+    private surveySvc: SurveyService,
+    private ajaxService : AjaxService,
+
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
@@ -49,7 +52,7 @@ export class SurveyComponent implements OnInit {
     
     //Load up initial display first
     this.setInitialDisplay(1);
-
+    this.loadQuestions();
   }
 
   //Used to reinitialize component. Home button in nav redirects to /survey, and allows for clicking home in
@@ -63,10 +66,19 @@ export class SurveyComponent implements OnInit {
   }
 
   loadQuestions() {
-    this.questions = this.surveySvc.getQuestions();
+    //TODO: Implement error handling
+
+    this.ajaxService.getQuestions()
+    .subscribe(
+      (response) => {
+          this.questions = response;
+          console.log(response);
+      },
+      (error) => console.log(error)
+    );
   }
 
-  receieveAnswers(data: any) {
+  receiveAnswers(data: any) {
     console.log(data);
     if (data.answers.length == 0) {
       this.questions = [];
@@ -78,7 +90,7 @@ export class SurveyComponent implements OnInit {
   }
 
   startSurvey() {
-    this.loadQuestions();
+    // this.loadQuestions();
     this.setInitialDisplay(0);
   }
 
@@ -94,7 +106,7 @@ export class SurveyComponent implements OnInit {
 
   ngOnDestroy() {
     // avoid memory leaks here by cleaning up after ourselves. If we  
-    // don't then we will continue to run our initialiseInvites()   
+    // don't then we will continue to run our reinitialize()   
     // method on every navigationEnd event.
     if (this.navigationSubscription) {  
        this.navigationSubscription.unsubscribe();
