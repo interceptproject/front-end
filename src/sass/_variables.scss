@@ -6,8 +6,13 @@ $blue: #188CC5;
 $off-white: #F5F5F5;
 
 // Primary font
-$default-foreign: sans-serif;
-$standard: sans-serif;
+// $default-foreign: sans-serif;
+$heading: 'Roboto Condensed';
+$text : 'Source Sans Pro';
+$standard : 'Roboto Condensed';
+
+//Backup Font
+$backup: sans-serif;
 
 // Font imports
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Roboto');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Roboto+Condensed');

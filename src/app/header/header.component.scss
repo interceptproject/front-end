@@ -2,7 +2,7 @@
 
 #header-component {
   width: 100%;
-  max-width: 1200px;
+  // max-width: 1200px;
   margin: auto;
   height: 30px;
   background-color: $light-blue;
@@ -14,7 +14,7 @@
     align-items: center;
     font-size: 12px;
     font-weight: 300;
-    font-family: $default-foreign;
+    font-family: $heading;
     color: white;
     .language {
       padding: 0px 15px;

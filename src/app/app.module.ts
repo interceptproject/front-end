@@ -17,6 +17,7 @@ import { SurveyService } from './services/survey.service';
 import { OrganizationListComponent } from './main/organization-list/organization-list.component';
 import { AjaxService } from './services/ajax.service';
 import { OrganizationBoxComponent } from './main/organization-list/organization-box/organization-box.component';
+import { QuickExitComponent } from './main/quick-exit/quick-exit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { OrganizationBoxComponent } from './main/organization-list/organization-
     SurveyComponent,
     QuestionBoxComponent,
     OrganizationListComponent,
-    OrganizationBoxComponent
+    OrganizationBoxComponent,
+    QuickExitComponent
   ],
   imports: [
     BrowserModule,
