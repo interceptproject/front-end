@@ -1,14 +1,18 @@
 @import "~sass/_variables";
 
 #nav-component {
-  height: 60px;
+  height: 70px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  background-color: $blue;
+  background-color: #4589c8;
   color: white;
   font-family: $heading;
   .title-box {
+    width: 140px;
+    height: 35px;
+    font-size: 30px;
+    font-weight: 100;
     flex: 1;
     margin-left: 15px;
   }
@@ -20,7 +24,7 @@
       flex-flow: row nowrap;
       justify-content: flex-end;
 
-      font-size: 13px;
+      font-size: 24px;
       font-weight: 400;
       .menu-item {
         padding: 0px 20px;
