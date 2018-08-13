@@ -31,6 +31,9 @@ export class SurveyComponent implements OnInit {
   //For allowing clicking on home in survey component to reset survey component
   navigationSubscription;
 
+  //Variable keeping track of whether user has read over disclaimer and is ready to proceed
+  userReady = false;
+
   initialDisplay: number;
   questions: any[];
 
@@ -39,30 +42,12 @@ export class SurveyComponent implements OnInit {
     private surveySvc: SurveyService,
     private ajaxService : AjaxService,
 
-  ) {
-    this.navigationSubscription = this.router.events.subscribe((e: any) => {
-      // If it is a NavigationEnd event re-initalise the component
-      if (e instanceof NavigationEnd) {
-        this.reinitialize();
-      }
-    });
-   }
+  ) { }
 
   ngOnInit() {
     
-    //Load up initial display first
-    this.setInitialDisplay(1);
+    //Loads questions
     this.loadQuestions();
-  }
-
-  //Used to reinitialize component. Home button in nav redirects to /survey, and allows for clicking home in
-  // the /survey component to 'refresh' the component
-  reinitialize() {
-    this.setInitialDisplay(1);
-  }
-
-  setInitialDisplay(number: number) {
-    this.initialDisplay = number;
   }
 
   loadQuestions() {
@@ -82,7 +67,6 @@ export class SurveyComponent implements OnInit {
     console.log(data);
     if (data.answers.length == 0) {
       this.questions = [];
-      return this.setInitialDisplay(1);
     }
     //get search result
     console.log('go to org list');
@@ -90,8 +74,7 @@ export class SurveyComponent implements OnInit {
   }
 
   startSurvey() {
-    // this.loadQuestions();
-    this.setInitialDisplay(0);
+    this.userReady = true;
   }
 
   submitSurvey(data: any) {
@@ -102,15 +85,6 @@ export class SurveyComponent implements OnInit {
         service: null
       }
     });
-  }
-
-  ngOnDestroy() {
-    // avoid memory leaks here by cleaning up after ourselves. If we  
-    // don't then we will continue to run our reinitialize()   
-    // method on every navigationEnd event.
-    if (this.navigationSubscription) {  
-       this.navigationSubscription.unsubscribe();
-    }
   }
 
 }
