@@ -1,26 +1,25 @@
 <div id="survey-component">
-  <div class="content">
-    <div
-    class="box"
-    *ngIf="userReady === false">
-      <div class="display">
-        <p>
-          If you are in imminent danger, please call Emergency Services at <span class="alert-text">911</span>.
-        </p>
-        <p>
-            Take 5 minutes to answer several questions. We will use your answers to give you a list of potentially suitable organizations. Skip any question you do not want to answer. Your information will be kept anonymous and confidential, and will not be shared with anyone unless you choose to do so.
-        </p>
-        <div class="button-wrapper">
-          <button
-          type="button"
-          class="btn btn-primary"
-          (click)="startSurvey()">
-            Got it
-          </button>
-        </div>
+  <div class="init"
+  *ngIf="userReady === false">
+    <div class="display">
+      <p>
+        If you are in imminent danger, please call Emergency Services at <span class="alert-text">911</span>.
+      </p>
+      <p>
+          Take 5 minutes to answer several questions. We will use your answers to give you a list of potentially suitable organizations. Skip any question you do not want to answer. Your information will be kept anonymous and confidential, and will not be shared with anyone unless you choose to do so.
+      </p>
+      <div class="button-wrapper">
+        <button
+        type="button"
+        class="btn btn-primary"
+        (click)="startSurvey()">
+          Got it
+        </button>
       </div>
     </div>
+  </div>
 
+  <div class="box-wrapper">
     <div
     class="box"
     *ngIf="userReady == true">
@@ -30,5 +29,6 @@
       </app-question-box>
     </div>
   </div>
+
 
 </div>

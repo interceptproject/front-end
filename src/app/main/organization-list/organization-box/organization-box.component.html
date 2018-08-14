@@ -1,6 +1,35 @@
-<!-- <p>
-    {{organization.basic_info.name}}
-</p> -->
 <div id="org-box-component">
-    {{organization.basic_info.name}}
+    <div id="line-1">
+        <div id="org-name">
+            {{organization.basic_info.name}}
+        </div>
+        
+    </div>
+    <div id="line-2">
+        <div id="hours">
+            <!-- {{organization.basic_info.hours}} -->
+        </div>
+        <div id="main-phone">
+            <!-- {{organization.contact_info.main_phone}} -->
+        </div>
+        <div id="address">
+
+        </div>
+    </div>
+    <div class="divider"></div>
+    <body class="intro">
+        {{organization.basic_info.intro}}
+    </body>
+    <div class="heading">
+        Rules
+    </div>
+    <div class="divider"></div>
+    <div class="rules-wrapper">
+
+        <div class="rule-icon"
+        *ngFor = "let target of organization.targets">
+            <span class="rule-text">{{target.text}}</span>
+        </div>
+    </div>
+
 </div>

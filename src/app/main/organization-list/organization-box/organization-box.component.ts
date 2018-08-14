@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-organization-box',
   templateUrl: './organization-box.component.html',
-  styleUrls: ['./organization-box.component.css']
+  styleUrls: ['./organization-box.component.scss']
 })
 export class OrganizationBoxComponent implements OnInit {
   /*

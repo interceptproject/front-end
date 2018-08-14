@@ -19,6 +19,7 @@ import { AjaxService } from './services/ajax.service';
 import { OrganizationBoxComponent } from './main/organization-list/organization-box/organization-box.component';
 import { QuickExitComponent } from './main/quick-exit/quick-exit.component';
 import { HomeComponent } from './main/home/home.component';
+import { UtilityBarComponent } from './main/organization-list/utility-bar/utility-bar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HomeComponent } from './main/home/home.component';
     OrganizationListComponent,
     OrganizationBoxComponent,
     QuickExitComponent,
-    HomeComponent
+    HomeComponent,
+    UtilityBarComponent
   ],
   imports: [
     BrowserModule,
