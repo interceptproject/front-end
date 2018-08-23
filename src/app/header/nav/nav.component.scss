@@ -1,0 +1,15 @@
+@import "~sass/_variables";
+
+#nav-component {
+  max-width: 1200px;
+  margin: auto;
+  @media (min-width: 320px) {
+
+  }
+  @media (min-width: 480px) {
+
+  }
+  #intercept {
+    font-size: 24px;
+  }
+}

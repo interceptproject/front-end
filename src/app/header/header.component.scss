@@ -2,23 +2,7 @@
 
 #header-component {
   width: 100%;
-  // max-width: 1200px;
-  margin: auto;
-  height: 30px;
-  background-color: #4589c8;
-  font-family: $heading;
-
-  .language-header {
-    height: 28px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 20px;
-    // font-weight: 300;
-    color: #ffffff;
-    .language {
-      padding: 0px 15px;
-    }
-  }
+  background-color: $background-blue;
+  color: white;
+  font-family: $heading-font;
 }

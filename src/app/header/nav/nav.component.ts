@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
+  isCollapsed: boolean;
+  constructor() {
+    this.isCollapsed = true;
+  }
+
   menuItems: {
     name: string,
     url: string,
@@ -24,9 +29,11 @@ export class NavComponent implements OnInit {
     set: false
   }];
 
-  constructor() { }
-
   ngOnInit() {
+  }
+
+  selectMenu(index: number) {
+
   }
 
 }

@@ -1,10 +1,34 @@
 @import "~sass/_variables";
 
 #survey-component {
-  font-family: $text;
-  font-size: 20px;
-  margin-top: 25px;
-  .init{
+  padding: 30px 20px;
+  p {
+    font-family: $text-font;
+  }
+  .button-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+  }
+
+  @media (min-width: 480px) {
+    padding: 35px;
+    .content {
+      min-width: 420px;
+      max-width: 500px;
+      margin: auto;
+    }
+  }
+
+  @media (min-width: 768px) {
+  
+  }
+
+  @media (min-width: 768px) {
+    padding: 45px;
+  }
+
+  /* .init{
     width: 550px;
     min-height: 200px;
     flex-flow: row nowrap;
@@ -63,5 +87,5 @@
         text-align: center;
       }
     }
-  }
+  } */
 }

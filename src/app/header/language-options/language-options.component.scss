@@ -1,0 +1,15 @@
+#language-options-component {
+  max-width: 1200px;
+  margin: auto;
+  height: 28px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 14px;
+  font-weight:  300;
+  .option {
+    min-width: 80px;
+    text-align: center;
+  }
+}

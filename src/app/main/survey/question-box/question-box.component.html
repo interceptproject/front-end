@@ -1,10 +1,10 @@
 <div id="question-box-component">
   <div class="progress-bar">
-    <progressbar
+    <ngb-progressbar
     type="success"
     [max]="questions.length"
     [value]="current.index + 1">
-    </progressbar>
+    </ngb-progressbar>
   </div>
   <div class="options-bar">
     <div class="pref">
@@ -19,9 +19,9 @@
       <button
       type="button"
       class="btn btn-link"
-      triggers="focus"
+      triggers="mouseenter:mouseleave"
       placement="bottom"
-      [popover]="current.question.help_text"
+      [ngbPopover]="current.question.help_text"
       [disabled]="surveyComplete">
         Why are we asking?
       </button>
@@ -38,7 +38,7 @@
   </div>
 
   <div
-  class="content"
+  class="main"
   *ngIf="!surveyComplete">
     <div class="question-wrapper">
       <span>{{current.question.question_text}}</span>
@@ -113,10 +113,12 @@
     </div>
   </div>
 
-  <div class="content"
+  <div class="main"
   *ngIf="surveyComplete">
   <div class="question-wrapper">
-    Thank you! You have answered all the questions. Press continue to see organizations that can potentially serve you.
+    Thank you! You have answered all the questions.
+    <br>
+    Press continue to see organizations that can potentially serve you.
   </div>
   <div class="next">
     <button

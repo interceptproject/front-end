@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
-import { SurveyService } from './../../services/survey.service';
-import { AjaxService } from './../../services/ajax.service';
+import { SurveyService } from './../../core/services/survey.service';
+import { AjaxService } from './../../core/services/ajax.service';
 
 //TODO:: make it to Model later
 //Question model needs to have service ID - 'category'(string) is not enough
@@ -45,7 +45,7 @@ export class SurveyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     //Loads questions
     this.loadQuestions();
   }

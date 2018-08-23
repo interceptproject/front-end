@@ -1,35 +1,104 @@
-<div id="org-box-component">
-    <div id="line-1">
-        <div id="org-name">
-            {{organization.basic_info.name}}
-        </div>
-        
+<div id="organization-box-component">
+  <div class="section">
+    <div class="heading heading-primary">
+      <div class="heading-item org-name">
+        {{org.basic_info.name}}
+      </div>
+      <div class="heading-item">
+        <!-- {{org.basic_info.}} -->
+        <span *ngIf="org.hotline['is24/7']">
+          24/7
+        </span>
+        Hotline:
+        <span *ngIf="org.hotline.has_hotline">
+          {{org.hotline.phone}}
+        </span>
+        <span *ngIf="!org.hotline.has_hotline">
+          N/A
+        </span>
+      </div>
+      <div class="heading-item">
+        1 mi
+      </div>
     </div>
-    <div id="line-2">
-        <div id="hours">
-            <!-- {{organization.basic_info.hours}} -->
-        </div>
-        <div id="main-phone">
-            <!-- {{organization.contact_info.main_phone}} -->
-        </div>
-        <div id="address">
+    <div class="heading heading-secondary">
+      <div class="heading-item">
+        {{org.basic_info.hours}}
+      </div>
+      <div class="heading-item">
+        {{org.contact_info.main_phone}}
+      </div>
+      <div class="heading-item">
+        {{org.location.public.address}}
+      </div>
+    </div>
+  </div>
+  <div class="section desc-section">
+    <div class="divider">
+    </div>
+    <div class="description">
+      {{org.basic_info.intro}}
+    </div>
+  </div>
+  <div class="section tags-section">
+    <div class="tags tags-targets">
+      <div class="title">
+        Targets
+      </div>
+      <div class="divider">
+      </div>
+      <div class="tag">
+        <span class="tag-item tag-item-light"
+        *ngFor="let item of org.targets">
+          {{item.text}}
+        </span>
+      </div>
+    </div>
+    <div class="tags tags-requirements">
+      <div class="title">
+        Requirements
+      </div>
+      <div class="divider">
 
-        </div>
+      </div>
+      <div class="tag">
+        <span class="tag-item tag-item-light"
+        *ngFor="let item of org.requirements">
+          {{item.text}}
+        </span>
+        <span class="tag-item tag-item-light"
+        *ngFor="let item of org.restrictions">
+          {{item.text}}
+        </span>
+      </div>
     </div>
-    <div class="divider"></div>
-    <body class="intro">
-        {{organization.basic_info.intro}}
-    </body>
-    <div class="heading">
-        Rules
-    </div>
-    <div class="divider"></div>
-    <div class="rules-wrapper">
+    <div class="tags tags-service">
+      <div class="title">
+        Services
+      </div>
+      <div class="divider">
 
-        <div class="rule-icon"
-        *ngFor = "let target of organization.targets">
-            <span class="rule-text">{{target.text}}</span>
-        </div>
+      </div>
+      <div class="tag">
+        <span class="tag-item tag-item-dark"
+        *ngFor="let item of org.services">
+          {{item.text}}
+        </span>
+      </div>
     </div>
+    <div class="tags tags-service">
+      <div class="title">
+        Specializations
+      </div>
+      <div class="divider">
 
+      </div>
+      <div class="tag">
+        <span class="tag-specialization-item"
+        *ngFor="let item of org.specializations">
+          {{item.text}}
+        </span>
+      </div>
+    </div>
+  </div>
 </div>

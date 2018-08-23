@@ -1,0 +1,42 @@
+@import "~sass/_variables";
+
+#utility-bar-component {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: #ffffff;
+  box-shadow: 0 5px 5px 0 #b5d1e9;
+  padding: 5px 10px;
+
+  .wrapper {
+    flex: 100%;
+    color: $grey;
+    font-size: 13px;
+    a {
+      color: $blue;
+      text-decoration: underline;
+    }
+  }
+
+  @media (min-width: 360px) {
+    /* height: 35px; */
+    .wrapper {
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 480px) {
+    .wrapper {
+      margin-left: 10px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    justify-content: space-between;
+    .wrapper {
+      flex: 1;
+      padding-left: 10px;
+      margin-left: 0px;
+    }
+  }
+
+}

@@ -1,32 +1,20 @@
 <app-utility-bar></app-utility-bar>
 <div id="organization-list-component">
-    <button
-      type="button"
-      class="btn btn-link"
-      (click)="getOrganizations()">
-        TEST
-      </button>
-  <div class="instruction">
 
-    <div *ngIf="surveyID">
-      <div class="surveyID">
-        Your Survey ID: {{surveyID}}
-      </div>
-      <div class="">
-        You may use your survey ID to get the up-to-date list of organizations that can help you.
-      </div>
-    </div>
-  </div>
-  <div class="result">
-    We have found {{organizations.length}} organization(s) based on your answers.
-    <div class="list">
-      <div class="organization"
-      *ngFor="let org of organizations">
-          <app-organization-box
-          [organization] = 'org'>
-          </app-organization-box>
-      </div>
-    </div>
-  </div>
 
+  <div class="result-title">
+    Results
+  </div>
+  <div class="result-contents">
+    <app-organization-box
+    [org]="org"
+    *ngFor="let org of organizations">
+    </app-organization-box>
+  </div>
+  <button
+  type="button"
+  class="btn btn-link"
+  (click)="getOrganizations()">
+    Get Dummy Data
+  </button>
 </div>

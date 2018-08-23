@@ -1,18 +1,16 @@
-// Primary color paleete
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,500,700|Source+Sans+Pro:300,300i,400,400i');
+
+// Colors
+$blue: #188CC5;
 $light-blue: #82BADD;
 $lightest-blue: #DFF2FE;
-$blue: #188CC5;
-
+$background-blue: #4589c8;
 $off-white: #F5F5F5;
+$red: #d0021b;
+$grey: #9b9b9b;
+$light-grey: #d0d0d0;
 
-// Primary font
-// $default-foreign: sans-serif;
-$heading: 'Roboto Condensed';
-$text: 'Source Sans Pro';
-$standard: 'Roboto Condensed';
-
-//Backup Font
-$backup: sans-serif;
-
-// Font imports
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Roboto+Condensed');
+// Fonts
+$heading-font: 'Roboto Condensed', 'Heletica Neue', sans-serif;
+$text-font: 'Source Sans Pro', 'Heletica Neue', sans-serif;
+$main-font: 'Roboto Condensed', 'Heletica Neue', sans-serif;

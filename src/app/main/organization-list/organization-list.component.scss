@@ -2,33 +2,22 @@
 
 #organization-list-component {
   // padding: 15px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 10px;
   font-size: 13px;
-  .instruction {
-    max-width: 900px;
-    margin: auto;
-    .surveyID {
-      font-size: 15px;
-    }
+  .result-title {
+    font-size: 18px;
+    color: $blue;
   }
-  .result {
-    max-width: 900px;
-    margin: 15px auto;
-    .list {
-      margin-top: 10px;
-//      border: 2px solid $light-blue;
-//      border-radius: 10px;
-      padding: 15px 20px;
+  .result-contents {
+    margin-top: 10px;
+  }
 
-      .organization {
-        .name {
-          font-size: 15px;
-        }
-        .address {
-          font-size: 13px;
-          color: grey;
-        }
-      }
-      /* background-color: $lightest-blue; */
+  @media (min-width: 480px) {
+    padding: 20px;
+    .result-title {
+      font-size: 22px;
     }
   }
 

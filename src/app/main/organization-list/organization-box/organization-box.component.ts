@@ -9,8 +9,8 @@ export class OrganizationBoxComponent implements OnInit {
   /*
   Organization is the "organization" passed in from organization-list component for individual display
   */
-  @Input() organization:object;
-    
+  @Input() org: object;
+
   constructor() { }
 
   ngOnInit() {

@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
-import { PopoverModule } from 'ngx-bootstrap/popover';
 
 export interface Selection {
   text: string,

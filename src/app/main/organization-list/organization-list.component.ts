@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { AjaxService } from './../../services/ajax.service';
+import { AjaxService } from './../../core/services/ajax.service';
 
 @Component({
   selector: 'app-organization-list',
@@ -56,7 +56,7 @@ export class OrganizationListComponent implements OnInit {
       "requirements" : []
     }
     console.log(userData);
-    
+
     this.ajaxService.getRelevantOrganizations(userData)
       .subscribe(
         (response) => {

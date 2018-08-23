@@ -1,0 +1,10 @@
+<div id="language-options-component">
+  <div
+  class="option"
+  [ngClass]="{'selected': option.set}"
+  *ngFor="let option of options; let i = index">
+    <span (click)="selectOption(i)">
+      {{option.name}}
+    </span>
+  </div>
+</div>
