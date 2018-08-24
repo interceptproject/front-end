@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { SurveyService } from './../../core/services/survey.service';
 import { AjaxService } from './../../core/services/ajax.service';
 
