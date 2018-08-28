@@ -12,7 +12,6 @@
       type="button"
       class="btn"
       (click)="previous(current.index)">
-       <span class="glyphicon glyphicon-question-sign"></span>
         Previous
       </button>
     </div>
@@ -23,7 +22,7 @@
       placement="bottom"
       [ngbPopover]="current.question.help_text"
       [disabled]="surveyComplete">
-        <span class="glyphicon glyphicon-question-sign"></span>
+        <img src="/../../../assets/info-icon.png" alt="info icon">
         Why are we asking?
       </button>
     </div>
