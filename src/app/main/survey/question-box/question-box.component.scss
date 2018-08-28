@@ -10,17 +10,24 @@
     height: 38px;
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-top: 1px;
+    .btn {
+      color: $blue;
+    }
     .prev {
-      width: 113.3px;
-      height: 28px;
+      flex: 1;
       text-align: left;
     }
     .info {
-      width: 350px;
+      flex: 3;
       text-align: center;
+      span {
+        width: 25px;
+      }
     }
     .skip {
-      width: 100px;
+      flex: 1;
       text-align: right;
     }
   }

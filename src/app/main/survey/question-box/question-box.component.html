@@ -7,29 +7,30 @@
     </ngb-progressbar>
   </div>
   <div class="options-bar">
-    <div class="pref">
+    <div class="prev">
       <button
       type="button"
-      class="btn btn-link"
+      class="btn"
       (click)="previous(current.index)">
+       <span class="glyphicon glyphicon-question-sign"></span>
         Previous
       </button>
     </div>
     <div class="info">
       <button
       type="button"
-      class="btn btn-link"
-      triggers="mouseenter:mouseleave"
+      class="btn"
       placement="bottom"
       [ngbPopover]="current.question.help_text"
       [disabled]="surveyComplete">
+        <span class="glyphicon glyphicon-question-sign"></span>
         Why are we asking?
       </button>
     </div>
     <div class="skip">
       <button
       type="button"
-      class="btn btn-light btn-link"
+      class="btn"
       [disabled]="surveyComplete"
       (click)="skip(current.index)">
         Skip
