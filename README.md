@@ -1,28 +1,11 @@
-# InterceptUi
+# Intercept
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
+A prototype for Intercept's main webstie. Intercept is a local organization serving victims of human trafficking, looking to build the network of all individuals and organizations fighting human trafficking across the country. A victim can visit the website, takes a quick survey about him and his situation, and have a list of organizations that are currently avaialble for help.
 
-## Development server
+## Technologies & Frameworks 
+- HTML
+- CSS, SASS, Compass, Bootstrap
+- JavaScript, Angular 4
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-# intercept-ui
+## Functionalies
+- Survey: in the form of a survey, the website takes information about the victim, which is necessary to identify organizations that are currently avaialble to provide help
