@@ -8,4 +8,6 @@ A prototype for Intercept's main webstie. Intercept is a local organization serv
 - JavaScript, Angular 4
 
 ## Functionalies
-- **Survey** In the form of a survey, the website takes information about the victim, which is necessary to identify organizations that are currently avaialble to provide help
+- **Survey** 
+  - In the form of a survey, the website takes information about the victim, which is necessary to identify organizations that are currently avaialble to provide help
+  - Survey and its result (a list of organization) can be saved for later use by victim himself or organization helping the victim
