@@ -17,16 +17,16 @@ export class NavComponent implements OnInit {
     set: boolean
   }[] = [{
     name: 'Home',
-    url: '/home',
+    url: '/',
     set: true
   }, {
     name: 'About',
-    url: '/',
-    set: false,
+    url: 'https://interceptproject.org/?page_id=18',
+    set: true,
   }, {
     name: 'Contact Us',
-    url: '/',
-    set: false
+    url: 'https://interceptproject.org/?page_id=19',
+    set: true
   }];
 
   ngOnInit() {

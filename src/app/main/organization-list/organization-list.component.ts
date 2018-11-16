@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { AjaxService } from './../../core/services/ajax.service';
+import { DataService } from './../../core/services/data.service';
 
 @Component({
   selector: 'app-organization-list',
@@ -35,16 +36,19 @@ export class OrganizationListComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private ajaxService: AjaxService
+    private ajaxService: AjaxService,
+    private data: DataService
   ) { }
 
   ngOnInit() {
-    console.log(this.route);
-    this.querySub = this.route.queryParams.subscribe(
-      (params) => {
-        //use query params to get search result & survey record
-      }, (err) => console.log(err)
-    );
+    this.data.currentList.subscribe(orgs => this.organizations = orgs)
+    console.log(this.organizations)
+    // this.querySub = this.route.queryParams.subscribe(
+    //   (params) => {
+    //     //use query params to get search result & survey recor
+    //     console.log(params)
+    //   }, (err) => console.log(err)
+    // );
   }
 
   getOrganizations() {

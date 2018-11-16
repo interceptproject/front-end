@@ -89,18 +89,19 @@ export class QuestionBoxComponent implements OnInit {
 
   previous(currentIndex: number) {
     if (currentIndex == 0) {
-      this.answers = [];
-      return this.sendAnswers.emit({
-        save: false,
-        answers: this.answers
-      });
+      // this.answers = [];
+      // return this.sendAnswers.emit({
+      //   save: false,
+      //   answers: this.answers
+      // });
+      return
     }
-    this.setAnswer(null, currentIndex);
+    this.setAnswer([], currentIndex);
     this.go(false, currentIndex);
   }
 
   skip(currentIndex: number) {
-    this.setAnswer(null, currentIndex);
+    this.setAnswer([], currentIndex);
     this.go(true, currentIndex);
   }
 
@@ -201,7 +202,11 @@ export class QuestionBoxComponent implements OnInit {
   }
 
   submit(saveOption: boolean) {
+    console.log(this.questions);
     console.log(this.answers);
+    const answers = this.answers.filter(answer => {
+      return answer.length > 0;
+    });
     this.sendAnswers.emit({
       save: saveOption,
       answers: this.answers

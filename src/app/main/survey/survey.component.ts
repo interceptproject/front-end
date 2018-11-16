@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { SurveyService } from './../../core/services/survey.service';
 import { AjaxService } from './../../core/services/ajax.service';
-
+import { DataService } from './../../core/services/data.service';
 //TODO:: make it to Model later
 //Question model needs to have service ID - 'category'(string) is not enough
 export interface Question {
@@ -40,6 +40,7 @@ export class SurveyComponent implements OnInit {
     private router: Router,
     private surveySvc: SurveyService,
     private ajaxService : AjaxService,
+    private dataService : DataService
 
   ) { }
 
@@ -67,9 +68,46 @@ export class SurveyComponent implements OnInit {
     if (data.answers.length == 0) {
       this.questions = [];
     }
-    //get search result
-    console.log('go to org list');
-    this.submitSurvey(data);
+    this.submitSurvey(this.processAnswers(data.answers));
+  }
+
+  processAnswers(answers: any[]) {
+    let location = "";
+    let specializations = [];
+    let services = [];
+    let targets = [];
+    let requirements = [];
+    const props = ['specializations', 'services', 'targets', 'requirements'];
+    for (let i = 0; i < answers.length; i++) {
+      // console.log(answers[i]);
+      for (let j = 0; j < answers[i].length; j++) {
+        if (typeof answers[i][j] == 'string') {
+          location = answers[i][j];
+        } else {
+          // console.log(answers[i][j]);
+          if (answers[i][j].specializations.length > 0) {
+            specializations.push(...answers[i][j].specializations);
+          }
+          if (answers[i][j].services.length > 0) {
+
+            services.push(...answers[i][j].services);
+          }
+          if (answers[i][j].targets.length > 0) {
+            targets.push(...answers[i][j].targets);
+          }
+          if (answers[i][j].requirements.length > 0) {
+            requirements.push(...answers[i][j].requirements);
+          }
+        }
+      }
+    }
+    return {
+      location: location,
+      specializations: specializations,
+      services: services,
+      targets: targets,
+      requirements: requirements
+    };
   }
 
   startSurvey() {
@@ -77,7 +115,12 @@ export class SurveyComponent implements OnInit {
   }
 
   submitSurvey(data: any) {
-    //make query params based on data
+    this.ajaxService.submitSurvey(data)
+      .subscribe(
+        (data) => this.dataService.updateList(data),
+        (err) => console.log(err)
+      );
+    
     this.router.navigate(['/organizations'], {
       queryParams: {
         save: data.save,
