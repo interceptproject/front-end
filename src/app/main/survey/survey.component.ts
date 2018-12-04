@@ -21,6 +21,7 @@ export interface Question {
   }
 }
 
+
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
@@ -35,6 +36,11 @@ export class SurveyComponent implements OnInit {
 
   initialDisplay: number;
   questions: any[];
+  specializations: any[];
+  services: any[];
+  targets: any[];
+  requirements: any[];
+  startTime: Date;
 
   constructor(
     private router: Router,
@@ -45,9 +51,9 @@ export class SurveyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     //Loads questions
     this.loadQuestions();
+    this.startTime = new Date();
   }
 
   loadQuestions() {
@@ -57,57 +63,24 @@ export class SurveyComponent implements OnInit {
     .subscribe(
       (response) => {
           this.questions = response;
-          console.log(response);
+          // console.log(response);
       },
       (error) => console.log(error)
     );
   }
 
   receiveAnswers(data: any) {
-    console.log(data);
-    if (data.answers.length == 0) {
-      this.questions = [];
-    }
-    this.submitSurvey(this.processAnswers(data.answers));
-  }
 
-  processAnswers(answers: any[]) {
-    let location = "";
-    let specializations = [];
-    let services = [];
-    let targets = [];
-    let requirements = [];
-    const props = ['specializations', 'services', 'targets', 'requirements'];
-    for (let i = 0; i < answers.length; i++) {
-      // console.log(answers[i]);
-      for (let j = 0; j < answers[i].length; j++) {
-        if (typeof answers[i][j] == 'string') {
-          location = answers[i][j];
-        } else {
-          // console.log(answers[i][j]);
-          if (answers[i][j].specializations.length > 0) {
-            specializations.push(...answers[i][j].specializations);
-          }
-          if (answers[i][j].services.length > 0) {
+    // if (data.answers.length == 0) {
+    //   this.questions = [];
+    // }
+    // Add in the total competion time for the survey
+    let endTime = new Date();
+    let totalTime = endTime - this.startTime;
+    data.totalTime = totalTime;
 
-            services.push(...answers[i][j].services);
-          }
-          if (answers[i][j].targets.length > 0) {
-            targets.push(...answers[i][j].targets);
-          }
-          if (answers[i][j].requirements.length > 0) {
-            requirements.push(...answers[i][j].requirements);
-          }
-        }
-      }
-    }
-    return {
-      location: location,
-      specializations: specializations,
-      services: services,
-      targets: targets,
-      requirements: requirements
-    };
+    //submit survey to backend
+    this.submitSurvey(data)
   }
 
   startSurvey() {

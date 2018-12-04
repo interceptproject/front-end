@@ -21,7 +21,8 @@
       class="btn"
       placement="bottom"
       [ngbPopover]="current.question.help_text"
-      [disabled]="surveyComplete">
+      [disabled]="surveyComplete"
+      (click)="setClickedWhy()">
         <img src="/../../../assets/info-icon.png" alt="info icon">
         Why are we asking?
       </button>
@@ -57,7 +58,7 @@
           class="text"
           [ngClass]="{'selected': option.selected}"
           (click)="clickRadioOption(i)">
-            {{option.option.text}}
+            {{option.optionData.text}}
           </span>
         </div>
       </div>

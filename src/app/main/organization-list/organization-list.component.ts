@@ -42,7 +42,6 @@ export class OrganizationListComponent implements OnInit {
 
   ngOnInit() {
     this.data.currentList.subscribe(orgs => this.organizations = orgs)
-    console.log(this.organizations)
     // this.querySub = this.route.queryParams.subscribe(
     //   (params) => {
     //     //use query params to get search result & survey recor
@@ -50,25 +49,4 @@ export class OrganizationListComponent implements OnInit {
     //   }, (err) => console.log(err)
     // );
   }
-
-  getOrganizations() {
-    let userData = {
-      "location" : "120 North Avenue NW",
-      "specializations" : [1,2,3,6,9],
-      "services" : [1,2,6,7,8],
-      "targets" : [2],
-      "requirements" : []
-    }
-    console.log(userData);
-
-    this.ajaxService.getRelevantOrganizations(userData)
-      .subscribe(
-        (response) => {
-            this.organizations = response;
-            console.log(response);
-        },
-        (error) => console.log(error)
-    );
-  }
-
 }
