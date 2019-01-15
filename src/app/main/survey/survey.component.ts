@@ -40,7 +40,7 @@ export class SurveyComponent implements OnInit {
   services: any[];
   targets: any[];
   requirements: any[];
-  startTime: Date;
+  startTime: any;
 
   constructor(
     private router: Router,
@@ -53,7 +53,7 @@ export class SurveyComponent implements OnInit {
   ngOnInit() {
     //Loads questions
     this.loadQuestions();
-    this.startTime = new Date();
+    this.startTime = +new Date();
   }
 
   loadQuestions() {
@@ -75,12 +75,14 @@ export class SurveyComponent implements OnInit {
     //   this.questions = [];
     // }
     // Add in the total competion time for the survey
-    let endTime = new Date();
+    let endTime = +new Date();
     let totalTime = endTime - this.startTime;
     data.totalTime = totalTime;
-
+    let date = new Date();
+    data.timeSent = date.toUTCString();
+    
     //submit survey to backend
-    this.submitSurvey(data)
+    this.submitSurvey(data);
   }
 
   startSurvey() {

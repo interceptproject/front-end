@@ -9,6 +9,7 @@ export class AjaxService {
   constructor(private http: Http) {}
 
   backendUrl = "https://cryptic-fjord-75697.herokuapp.com";
+  // backendUrl = "http://localhost:5000";
 
   getQuestions(): Observable<any> {
         return this.http.get(this.backendUrl + '/survey').map((res) => res.json());

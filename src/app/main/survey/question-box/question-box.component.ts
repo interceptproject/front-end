@@ -33,13 +33,14 @@ export class QuestionBoxComponent implements OnInit {
     qID: number,
     clickedWhy: boolean,
     skipped: boolean,
-    startTime: Date
+    startTime: any
   } = {
     index: 0,
     question: null,
     qID: null,
     clickedWhy: false,
-    skipped: false
+    skipped: false,
+    startTime: null
   };
   
   isAnswered: boolean = false;
@@ -87,7 +88,7 @@ export class QuestionBoxComponent implements OnInit {
       qID: index + 1,
       clickedWhy: false,
       skipped: false,
-      startTime: new Date()
+      startTime: +new Date()
     };
     if (this.current.question) {
       this.loadAnswerOptions(this.current.question.display);
@@ -247,7 +248,7 @@ export class QuestionBoxComponent implements OnInit {
   // Returns a list of dicts of the answer_ids selected and their texts
   captureData(answers?: any[]) {
     // get the end time to figure out how long it took user to complete this
-    let endTime = new Date();
+    let endTime = +new Date();
     let completionTime = endTime - this.current.startTime
 
     // create the data object
@@ -310,7 +311,7 @@ export class QuestionBoxComponent implements OnInit {
   }
 
 
-  // FIXXXX
+
   submit(saveOption: boolean) {
     this.sendAnswers.emit({
       location: this.location,
