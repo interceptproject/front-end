@@ -50,6 +50,7 @@ export class SurveyComponent implements OnInit {
 
   ) { }
 
+  // First things that happens
   ngOnInit() {
     //Loads questions
     this.loadQuestions();
@@ -59,11 +60,19 @@ export class SurveyComponent implements OnInit {
   loadQuestions() {
     //TODO: Implement error handling
 
-    this.ajaxService.getQuestions()
+    // this.ajaxService.getQuestions()
+    // .subscribe(
+    //   (response) => {
+    //       this.questions = response;
+    //       console.log(response);
+    //   },
+    //   (error) => console.log(error)
+    // );
+    this.ajaxService.getQuestion(1)
     .subscribe(
       (response) => {
           this.questions = response;
-          // console.log(response);
+          console.log(response);
       },
       (error) => console.log(error)
     );

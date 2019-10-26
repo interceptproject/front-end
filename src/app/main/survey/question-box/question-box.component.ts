@@ -27,15 +27,29 @@ export interface Data {
 export class QuestionBoxComponent implements OnInit {
   @Input() questions: any[];
   
+  // current: {
+  //   index: number,
+  //   question: any,
+  //   qID: number,
+  //   clickedWhy: boolean,
+  //   skipped: boolean,
+  //   startTime: any
+  // } = {
+  //   index: 0,
+  //   question: null,
+  //   qID: null,
+  //   clickedWhy: false,
+  //   skipped: false,
+  //   startTime: null
+  // };
+
   current: {
-    index: number,
     question: any,
     qID: number,
     clickedWhy: boolean,
     skipped: boolean,
     startTime: any
   } = {
-    index: 0,
     question: null,
     qID: null,
     clickedWhy: false,
@@ -64,6 +78,9 @@ export class QuestionBoxComponent implements OnInit {
   requirements: number[] = [];
   responseData: any[] = [];
 
+  // Used for keeping track of which questions are answered, and allowing for undoing
+  answeredQuestions = [];
+
   // MIGHT HAVE TO CHANGE BELOW SINCE CHANGING STRUCTURE OF THE ARRAY
   @Output() sendAnswers = new EventEmitter<{
     location: string,
@@ -77,15 +94,33 @@ export class QuestionBoxComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.loadQuestion(0);
+    // this.loadQuestion(0);
+    let first_question = this.questions[0];
+    this.loadQuestion(first_question);
   }
 
   // Load's the question corresponding to the index for display
-  loadQuestion(index: number) {
+  // loadQuestion(index: number) {
+  //   this.current = {
+  //     index: index,
+  //     question : this.questions[index],
+  //     qID: index + 1,
+  //     clickedWhy: false,
+  //     skipped: false,
+  //     startTime: +new Date()
+  //   };
+  //   if (this.current.question) {
+  //     this.loadAnswerOptions(this.current.question.display);
+  //   }
+
+  // }
+
+  // New loadQuestion that takes in a question
+  loadQuestion(question) {
+    console.log(question);
     this.current = {
-      index: index,
-      question : this.questions[index],
-      qID: index + 1,
+      question : null,
+      qID: question.question_id,
       clickedWhy: false,
       skipped: false,
       startTime: +new Date()
@@ -120,7 +155,6 @@ export class QuestionBoxComponent implements OnInit {
     }
     if (display == 'location') {
       this.textInput = null;
-      // console.log(this.textInput);
     }
   }
   

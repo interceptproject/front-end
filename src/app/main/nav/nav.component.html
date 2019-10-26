@@ -1,0 +1,20 @@
+<div id="nav-component">
+  <div class="title-box">
+    <span class="logo">
+      (LOGO)
+    </span>
+    <span class="title">
+      Intercept
+    </span>
+  </div>
+  <div class="menu-box">
+    <div class="menu">
+      <div
+      class="menu-item"
+      [ngClass]="{'selected': item.set}"
+      *ngFor="let item of menuItems">
+        {{item.name}}
+      </div>
+    </div>
+  </div>
+</div>
